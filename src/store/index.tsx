@@ -40,19 +40,9 @@ interface latlng {
   long: number;
 }
 
-// export async function getData() {
-//   const url = "https://restcountries.com/v3.1/all";
-//   try {
-//     const response = await axios.get<[]>(url);
-//     return response.data;
-//   } catch (err) {
-//     throw err;
-//   }
-// }
-
 export const fetchWeatherByCountry = createAsyncThunk(
   "weather/fetch",
-  async (latlng: latlng, thunkApi) => {
+  async (latlng: latlng) => {
     const apikey = "8e589602d0897f471b7541ddb5210b5c";
     try {
       const response = await axios.get(
@@ -66,17 +56,14 @@ export const fetchWeatherByCountry = createAsyncThunk(
   }
 );
 
-export const fetchCountries = createAsyncThunk(
-  "countries/fetch",
-  async (_, thunkApi) => {
-    try {
-      const response = await axios.get("https://restcountries.com/v3.1/all");
-      return response.data;
-    } catch (error) {
-      return error;
-    }
+export const fetchCountries = createAsyncThunk("countries/fetch", async () => {
+  try {
+    const response = await axios.get("https://restcountries.com/v3.1/all");
+    return response.data;
+  } catch (error) {
+    return error;
   }
-);
+});
 
 export const weathersSlice = createSlice({
   name: "temperatureReducer",
