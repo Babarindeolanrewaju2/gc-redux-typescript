@@ -19,9 +19,12 @@ const SelectCountry = styled.select`
   background: white;
   padding-left: 5px;
   font-size: 14px;
-  margin-left: 10px;
+  font-family: "CircularStdBook";
+  width: 100%;
+  margin-bottom: 10px;
 
   option {
+    font-family: "CircularStdBook";
     color: black;
     background: white;
     display: flex;
@@ -50,6 +53,10 @@ export const Select = () => {
         <p>loading... </p>
       ) : (
         <SelectCountry onChange={(e) => handleChange(e)}>
+          <option value="" disabled>
+            {" "}
+            Select a country
+          </option>
           {countries?.map(
             (country: countryObject, index: Key | null | undefined) => (
               <option key={index} value={JSON.stringify(country)}>
