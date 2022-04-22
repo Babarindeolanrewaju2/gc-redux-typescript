@@ -1,4 +1,4 @@
-import { Key, useEffect } from "react";
+import { Key, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import {
@@ -34,15 +34,18 @@ const SelectCountry = styled.select`
   }
 `;
 
-export const Select = () => {
+export const Select: React.FC = () => {
+  const [selected, setSelected] = useState<any>("");
   const dispatch = useTypedDispatch();
   const response = useTypedSelector((state) => state?.countries);
   const { countries, loading } = response;
   const handleChange = async (event: any) => {
     const latlng = JSON.parse(event.target.value);
+    setSelected(event.target.value);
     dispatch(fetchWeatherByCountry(latlng));
   };
 
+  //fetch the country data on mount
   useEffect(() => {
     dispatch(fetchCountries());
   }, [dispatch]);
@@ -52,9 +55,8 @@ export const Select = () => {
       {loading ? (
         <p>loading... </p>
       ) : (
-        <SelectCountry onChange={(e) => handleChange(e)}>
+        <SelectCountry onChange={(e) => handleChange(e)} value={selected}>
           <option value="" disabled>
-            {" "}
             Select a country
           </option>
           {countries?.map(

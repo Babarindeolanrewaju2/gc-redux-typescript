@@ -11,6 +11,7 @@ type temp = {
   };
   wind?: {
     speed?: number;
+    deg?: number;
   };
 };
 
@@ -20,9 +21,11 @@ const Tiles = styled.div`
   flex-wrap: wrap;
   width: 100%;
 
-  & p {
+  & div {
     display: flex;
-    flex: 1;
+    flex-basis: 100%;
+    flex: 0 1 auto;
+    flex-basis: auto;
     border: black solid 0.5px;
     padding: 25px;
     background-color: lightgray;
@@ -31,27 +34,44 @@ const Tiles = styled.div`
     justify-content: center;
     align-items: center;
     height: 100px;
+    width: 50%;
+
+    &:hover {
+      background-color: green;
+      color: white;
+    }
+
+    & strong {
+      display: block;
+    }
   }
 `;
-export const Weather = () => {
+export const Weather: React.FC = () => {
   const weather: temp = useTypedSelector((state) => state?.temperature.weather);
   const loading = useTypedSelector((state) => state?.temperature.loading);
   if (Object.keys(weather).length === 0) {
     return <p>No country selected</p>;
   }
 
+  // if the data is fetched and status is loading then return a message ";loading"
   if (loading === "pending") {
     return <p>loading...</p>;
   }
+
+  // weather details for a country
   return (
     <Tiles>
-      <p>
-        Temperature: min: {weather?.main?.temp_min} / max:{" "}
+      <div>
+        Temperature: <br /> min: {weather?.main?.temp_min} / max:
         {weather?.main?.temp_max}
-      </p>
-      <p>Wind: {weather.wind?.speed}</p>
-      <p>Humidity: {weather.main?.humidity}</p>
-      <p>Pressure: {weather.main?.pressure}</p>
+      </div>
+      <div>
+        Wind: <br />
+        speed:
+        {weather.wind?.speed} direction: {weather.wind?.deg}
+      </div>
+      <div>Humidity: {weather.main?.humidity}</div>
+      <div>Pressure: {weather.main?.pressure}</div>
     </Tiles>
   );
 };

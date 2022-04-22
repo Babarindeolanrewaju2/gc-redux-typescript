@@ -43,10 +43,9 @@ interface latlng {
 export const fetchWeatherByCountry = createAsyncThunk(
   "weather/fetch",
   async (latlng: latlng) => {
-    const apikey = "8e589602d0897f471b7541ddb5210b5c";
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latlng?.lat}&lon=${latlng?.long}&appid=${apikey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latlng?.lat}&lon=${latlng?.long}&appid=${process.env.REACT_APP_API_KEY}`
       );
 
       return response.data;
@@ -65,6 +64,7 @@ export const fetchCountries = createAsyncThunk("countries/fetch", async () => {
   }
 });
 
+//reducer for the weather
 export const weathersSlice = createSlice({
   name: "temperatureReducer",
   initialState: initialWeatherState,
@@ -85,6 +85,7 @@ export const weathersSlice = createSlice({
   },
 });
 
+//reducer for the countries
 export const countriesSlice = createSlice({
   name: "countriesReducer",
   initialState: initialCountriesState,
@@ -124,8 +125,6 @@ export const store = configureStore({
   devTools: true,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
-
-console.log(store.getState());
 
 export type RootState = ReturnType<typeof store.getState>;
 
