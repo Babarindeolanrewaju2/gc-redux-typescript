@@ -6,7 +6,7 @@ import { Weather } from "./components/Weather";
 import styled from "styled-components";
 
 const MainApp = styled.div`
-  padding-top: 200px;
+  padding-top: 100px;
   width: 350px;
   margin: 0 auto;
 `;
@@ -24,6 +24,7 @@ const App: React.FC = () => {
   return (
     <MainApp>
       <Column>
+        <h3>check the weather information for a specific country</h3>
         <Select />
         <Weather />
       </Column>
