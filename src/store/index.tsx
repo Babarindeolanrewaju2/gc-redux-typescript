@@ -9,7 +9,7 @@ import {
   combineReducers,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
 interface countriesState {
   countries?: object[];
@@ -122,8 +122,6 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  devTools: true,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
