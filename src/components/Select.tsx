@@ -39,7 +39,7 @@ export const Select: React.FC = () => {
   const dispatch = useTypedDispatch();
   const response = useTypedSelector((state) => state?.countries);
   const { countries, loading } = response;
-  const handleChange = async (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const latlng = JSON.parse(event.target.value);
     setSelected(event.target.value);
     dispatch(fetchWeatherByCountry(latlng));
@@ -55,7 +55,7 @@ export const Select: React.FC = () => {
       {loading ? (
         <p>loading... </p>
       ) : (
-        <SelectCountry onChange={(e) => handleChange(e)} value={selected}>
+        <SelectCountry onChange={handleChange} value={selected}>
           <option value="" disabled>
             Select a country
           </option>
