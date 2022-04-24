@@ -35,6 +35,7 @@ const Tiles = styled.div`
     align-items: center;
     height: 100px;
     width: 50%;
+    transition: all 0.5s ease-out;
 
     &:hover {
       background-color: green;

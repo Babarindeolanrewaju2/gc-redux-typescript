@@ -1,12 +1,9 @@
 import { Key, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import {
-  fetchCountries,
-  useTypedDispatch,
-  fetchWeatherByCountry,
-  useTypedSelector,
-} from "../store/index";
+import { useTypedDispatch, useTypedSelector } from "../store/index";
+
+import { fetchWeatherByCountry } from "../store/weatherSlice";
 
 interface countryObject {
   CountryName?: string;
@@ -44,11 +41,6 @@ export const Select: React.FC = () => {
     setSelected(event.target.value);
     dispatch(fetchWeatherByCountry(latlng));
   };
-
-  //fetch the country data on mount
-  useEffect(() => {
-    dispatch(fetchCountries());
-  }, [dispatch]);
 
   return (
     <div>

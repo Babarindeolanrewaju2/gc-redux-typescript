@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-
-import { useTypedDispatch, fetchCountries } from "./store/index";
+import { useTypedDispatch } from "./store/index";
+import { fetchCountries } from "./store/countriesSlice";
 import { Select } from "./components/Select";
 import { Weather } from "./components/Weather";
 import styled from "styled-components";
+
+console.log(fetchCountries);
 
 const MainApp = styled.div`
   padding-top: 100px;
